@@ -78,7 +78,10 @@ while True:
 ##    arrimg=arrimg
     
     y=predict(w,b,im)
-    print(y)
+    if y==True:
+        print("its Cat")
+    else:
+        print("its Non Cat")
     
 ##    cv2.waitKey(0)
     if cv2.waitKey(1) & 0xFF == ord('q'):
