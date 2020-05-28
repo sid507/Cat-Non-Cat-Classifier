@@ -66,28 +66,55 @@ w,b=initialize_parameter(12288)
 w,b=optimize(w,b,train_set_x,train_set_y_orig,0.005,2000)
 
 cap=cv2.VideoCapture(0)
-
+window_name='sd'
 while True:
     _,img=cap.read()
-    cv2.imshow('sd',img)
+    
 ##    img=cv2.imread('Capture.jpg')
-    img=cv2.resize(img,(64,64))
-    im=img.flatten().reshape(1,12288).T
+    
     
 ##    arrimg=np.array(img)
 ##    arrimg=arrimg
+    font = cv2.FONT_HERSHEY_SIMPLEX 
+  
+# org 
+    org = (50, 50) 
+      
+    # fontScale 
+    fontScale = 1
+       
+    # Blue color in BGR 
+    color = (255, 0, 0) 
+      
+    # Line thickness of 2 px 
+    thickness = 2
+       
+    # Using cv2.putText() method 
     
+    img2=cv2.resize(img,(64,64))
+    im=img2.flatten().reshape(1,12288).T  
     y=predict(w,b,im)
-    if y==True:
-        print("its Cat")
+    if (y==True):
+        image = cv2.putText(img, 'Cat', org, font,  
+                       fontScale, color, thickness, cv2.LINE_AA)
     else:
-        print("its Non Cat")
-    
+        image = cv2.putText(img, 'NonCat', org, font,  
+                       fontScale, color, thickness, cv2.LINE_AA)
+        
+    cv2.imshow(window_name,image)
+
 ##    cv2.waitKey(0)
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+    if cv2.waitKey(1) & 0xFF == ord('w'):
         break
     
     
+    
+
+
+
+
+
+
     
 
 
